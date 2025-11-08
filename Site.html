@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carlosleite.me - Automação Inteligente para Negócios</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text color */
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 60px;
+            height: 4px;
+            background-color: #6366f1; /* Indigo-500 for highlight */
+            border-radius: 9999px; /* Rounded corners for the underline */
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ more opacity */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #2d3748; /* Darker background for modal */
+            color: #e2e8f0; /* Light text for modal */
+            margin: auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .close-button {
+            color: #cbd5e0; /* Light gray for close button */
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #ffffff; /* White on hover */
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-sm py-4 px-6 md:px-10 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo/Brand Name -->
+            <a href="#home" class="text-3xl font-bold text-blue-400 rounded-lg p-2 hover:text-blue-300 transition-colors">carlosleite.me</a>
+            <!-- Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#servicos" class="text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors">Serviços</a>
+                <a href="#sobre" class="text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors">Sobre</a>
+                <a href="#noticias" class="text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors">Notícias</a>
+                <a href="#contato" class="text-lg font-medium text-gray-300 hover:text-blue-400 transition-colors">Contato</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-6">
+            <button id="close-mobile-menu" class="absolute top-6 right-6 text-gray-300 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <a href="#servicos" class="text-2xl font-medium text-gray-300 hover:text-blue-400 transition-colors" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Serviços</a>
+            <a href="#sobre" class="text-2xl font-medium text-gray-300 hover:text-blue-400 transition-colors" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Sobre</a>
+            <a href="#noticias" class="text-2xl font-medium text-gray-300 hover:text-blue-400 transition-colors" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Notícias</a>
+            <a href="#contato" class="text-2xl font-medium text-gray-300 hover:text-blue-400 transition-colors" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contato</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gradient-to-r from-indigo-700 to-purple-900 text-white py-20 md:py-32 overflow-hidden rounded-b-xl shadow-lg">
+        <div class="container mx-auto text-center px-6 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-up">
+                Automatize seu Atendimento e Impulsione seus Resultados com IA
+            </h1>
+            <p class="text-lg md:text-2xl mb-10 max-w-3xl mx-auto opacity-90 animate-fade-in-up delay-200">
+                A **carlosleite.me** transforma a comunicação da sua empresa, com foco em atendimento via WhatsApp impulsionado por inteligência artificial.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-400">
+                <a href="#servicos" class="bg-white text-indigo-700 px-8 py-4 rounded-full text-xl font-semibold shadow-lg hover:bg-gray-100 transition-all transform hover:scale-105 duration-300">
+                    Conheça Nossos Serviços
+                </a>
+                <a href="#contato" class="border-2 border-white text-white px-8 py-4 rounded-full text-xl font-semibold shadow-lg hover:bg-white hover:text-indigo-700 transition-all transform hover:scale-105 duration-300">
+                    Agende uma Consultoria
+                </a>
+            </div>
+        </div>
+        <!-- Background elements for visual appeal -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none" fill="currentColor">
+                <path d="M0,160L48,176C96,192,192,224,288,208C384,192,480,128,576,122.7C672,117,768,171,864,186.7C960,203,1056,181,1152,165.3C1248,149,1344,149,1392,149.3L1440,149.3L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-16 md:py-24 bg-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-12 text-gray-100 section-title mx-auto">Nossos Serviços</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Service 1: Automação de Atendimento via WhatsApp com IA -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 flex flex-col justify-between items-center">
+                    <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Atendimento+WhatsApp+IA+Real" alt="Atendimento via WhatsApp com IA" class="w-full h-48 object-cover rounded-lg mb-6 shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Automação de Atendimento via WhatsApp com IA</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4 flex-grow">
+                        Transforme seu atendimento com bots inteligentes que operam 24/7 no WhatsApp. A **carlosleite.me** cria soluções personalizadas para otimizar a comunicação, reduzir custos e aumentar a satisfação do cliente.
+                    </p>
+                    <ul class="text-left text-gray-400 space-y-2 mb-6 w-full">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Atendimento 24/7</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Redução de Custos Operacionais</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Escalabilidade e Eficiência</li>
+                    </ul>
+                    <a href="#contato" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-md">Saiba Mais</a>
+                </div>
+
+                <!-- Service 2: Consultoria em IA para Negócios -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 flex flex-col justify-between items-center">
+                    <img src="https://placehold.co/600x400/818cf8/ffffff?text=Consultoria+Estrategica+IA+Real" alt="Consultoria em IA para Negócios" class="w-full h-48 object-cover rounded-lg mb-6 shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-400 mb-4">Consultoria em IA para Negócios</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4 flex-grow">
+                        A **carlosleite.me** oferece consultoria especializada para identificar e implementar soluções de IA que aumentam a produtividade e otimizam processos em sua empresa. Do diagnóstico à implementação, estamos com você.
+                    </p>
+                    <ul class="text-left text-gray-400 space-y-2 mb-6 w-full">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Diagnóstico Personalizado</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Planejamento Estratégico</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Otimização de Processos</li>
+                    </ul>
+                    <a href="#contato" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-md">Agende uma Consultoria</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-16 md:py-24 bg-gray-800">
+        <div class="container mx-auto px-6 text-center md:flex md:items-center md:space-x-12">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <img src="https://placehold.co/600x400/9ca3af/ffffff?text=Equipe+carlosleite.me+Real" alt="Sobre carlosleite.me" class="rounded-xl shadow-lg w-full h-auto object-cover">
+            </div>
+            <div class="md:w-1/2 text-left">
+                <h2 class="text-4xl font-bold mb-8 text-gray-100 section-title">Sobre a carlosleite.me</h2>
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    Na **carlosleite.me**, acreditamos que a inteligência artificial é a chave para o futuro dos negócios. Nossa missão é capacitar empresas de todos os portes a inovar e otimizar suas operações através de soluções de IA personalizadas e eficazes.
+                </p>
+                <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                    Com um profundo conhecimento em automação de atendimento e consultoria estratégica, a **carlosleite.me** se dedica a transformar desafios em oportunidades, impulsionando a produtividade e a satisfação do cliente.
+                </p>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    Somos apaixonados por tecnologia e comprometidos em entregar resultados tangíveis para o seu negócio.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="noticias" class="py-16 md:py-24 bg-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-12 text-gray-100 section-title mx-auto">Notícias e Insights sobre IA nos Negócios</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <article class="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 flex flex-col justify-between items-start">
+                    <img src="https://placehold.co/600x350/a78bfa/ffffff?text=Noticia+IA+Atendimento+Real" alt="IA no Atendimento ao Cliente" class="w-full h-48 object-cover rounded-lg mb-4 shadow-md">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-3 text-left w-full">Como a IA está Revolucionando o Atendimento ao Cliente</h3>
+                    <p class="text-gray-300 text-sm mb-4 article-content text-left flex-grow">
+                        A inteligência artificial está mudando a forma como as empresas se relacionam com seus clientes. Chatbots avançados e sistemas de IA podem personalizar o atendimento, responder a dúvidas complexas e até mesmo antecipar necessidades, resultando em maior satisfação e eficiência operacional.
+                    </p>
+                    <button class="summarize-button inline-block bg-blue-600 text-white px-4 py-2 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors shadow-md mt-auto self-center">
+                        ✨ Resumir Artigo
+                    </button>
+                </article>
+                <!-- Article 2 -->
+                <article class="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 flex flex-col justify-between items-start">
+                    <img src="https://placehold.co/600x350/818cf8/ffffff?text=Noticia+IA+Produtividade+Real" alt="IA e Produtividade Empresarial" class="w-full h-48 object-cover rounded-lg mb-4 shadow-md">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-3 text-left w-full">Aumento da Produtividade: O Papel da IA nas Empresas</h3>
+                    <p class="text-gray-300 text-sm mb-4 article-content text-left flex-grow">
+                        A inteligência artificial é uma ferramenta poderosa para impulsionar a produtividade empresarial. Desde a automação de tarefas repetitivas até a análise de grandes volumes de dados para insights estratégicos, a IA libera recursos humanos para atividades de maior valor, otimizando processos e reduzindo erros.
+                    </p>
+                    <button class="summarize-button inline-block bg-blue-600 text-white px-4 py-2 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors shadow-md mt-auto self-center">
+                        ✨ Resumir Artigo
+                    </button>
+                </article>
+                <!-- Article 3 -->
+                <article class="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 flex flex-col justify-between items-start">
+                    <img src="https://placehold.co/600x350/6366f1/ffffff?text=Noticia+WhatsApp+Bots+Real" alt="WhatsApp Bots para Negócios" class="w-full h-48 object-cover rounded-lg mb-4 shadow-md">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-3 text-left w-full">O Poder dos Bots de WhatsApp para o Seu Negócio</h3>
+                    <p class="text-gray-300 text-sm mb-4 article-content text-left flex-grow">
+                        Os bots de WhatsApp representam uma revolução no atendimento ao cliente e nas vendas. Eles permitem que empresas respondam instantaneamente a consultas, enviem notificações personalizadas e até mesmo processem pedidos, tudo dentro da plataforma de mensagens mais popular do mundo, garantindo uma experiência fluida e eficiente.
+                    </p>
+                    <button class="summarize-button inline-block bg-blue-600 text-white px-4 py-2 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors shadow-md mt-auto self-center">
+                        ✨ Resumir Artigo
+                    </button>
+                </article>
+            </div>
+            <div class="mt-12">
+                <a href="#" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-full text-xl font-semibold shadow-lg hover:bg-blue-700 transition-colors transform hover:scale-105 duration-300">
+                    Ver Todas as Notícias
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-16 md:py-24 bg-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-12 text-gray-100 section-title mx-auto">Entre em Contato</h2>
+            <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+                Tem um projeto em mente ou quer saber mais sobre como a **carlosleite.me** pode ajudar sua empresa? Preencha o formulário abaixo ou entre em contato diretamente.
+            </p>
+            <div class="max-w-xl mx-auto bg-gray-900 p-8 rounded-xl shadow-lg">
+                <form action="#" method="POST" class="space-y-6">
+                    <div>
+                        <label for="nome" class="block text-left text-gray-300 text-sm font-medium mb-2">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-700 text-white" placeholder="Seu nome" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-left text-gray-300 text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-700 text-white" placeholder="seu.email@exemplo.com" required>
+                    </div>
+                    <div>
+                        <label for="telefone" class="block text-left text-gray-300 text-sm font-medium mb-2">Telefone (Opcional)</label>
+                        <input type="tel" id="telefone" name="telefone" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-700 text-white" placeholder="(XX) XXXXX-XXXX">
+                    </div>
+                    <div>
+                        <label for="mensagem" class="block text-left text-gray-300 text-sm font-medium mb-2">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" class="w-full px-4 py-3 border border-gray-700 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition-all bg-gray-700 text-white" placeholder="Descreva seu interesse ou projeto..." required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-blue-700 transition-colors shadow-md transform hover:scale-105 duration-300">
+                        Enviar Mensagem
+                    </button>
+                </form>
+                <div class="mt-8 text-center text-gray-400">
+                    <p>Ou entre em contato diretamente:</p>
+                    <p class="mt-2 text-blue-400 font-semibold">
+                        Email: <a href="mailto:contato@carlosleite.me" class="hover:underline">contato@carlosleite.me</a>
+                    </p>
+                    <p class="mt-2 text-blue-400 font-semibold">
+                        WhatsApp: <a href="https://wa.me/55XXYYYYZZZZZ" target="_blank" class="hover:underline">(XX) XXXXX-XXXX</a> (substitua com seu número)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-6 md:px-10 rounded-t-xl shadow-inner">
+        <div class="container mx-auto text-center">
+            <p class="text-lg mb-4">
+                <a href="#home" class="text-blue-400 font-bold hover:text-blue-300 transition-colors">carlosleite.me</a> - Sua Parceira em Automação com Inteligência Artificial.
+            </p>
+            <nav class="flex justify-center space-x-6 mb-4">
+                <a href="#servicos" class="text-gray-300 hover:text-blue-400 transition-colors">Serviços</a>
+                <a href="#sobre" class="text-gray-300 hover:text-blue-400 transition-colors">Sobre</a>
+                <a href="#noticias" class="text-gray-300 hover:text-blue-400 transition-colors">Notícias</a>
+                <a href="#contato" class="text-gray-300 hover:text-blue-400 transition-colors">Contato</a>
+            </nav>
+            <p class="text-gray-400 text-sm">&copy; 2025 carlosleite.me. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Summary Modal Structure -->
+    <div id="summaryModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" id="closeModalButton">&times;</span>
+            <h3 class="text-2xl font-bold text-blue-400 mb-4">Resumo do Artigo ✨</h3>
+            <div id="summaryContent" class="text-gray-300 leading-relaxed">
+                <!-- Summary will be loaded here -->
+            </div>
+            <div id="loadingIndicator" class="text-center text-blue-400 mt-4 hidden">
+                Carregando resumo...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        closeMobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Gemini API Integration for Article Summarization
+        const summarizeButtons = document.querySelectorAll('.summarize-button');
+        const summaryModal = document.getElementById('summaryModal');
+        const summaryContent = document.getElementById('summaryContent');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const closeModalButton = document.getElementById('closeModalButton');
+
+        // Function to open the modal
+        function openModal() {
+            summaryModal.style.display = 'flex';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            summaryModal.style.display = 'none';
+            summaryContent.innerHTML = ''; // Clear content when closing
+            loadingIndicator.classList.add('hidden'); // Hide loading indicator
+        }
+
+        // Add event listener to close button
+        closeModalButton.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (event) => {
+            if (event.target == summaryModal) {
+                closeModal();
+            }
+        });
+
+        summarizeButtons.forEach(button => {
+            button.addEventListener('click', async (event) => {
+                const articleParagraph = event.target.closest('article').querySelector('.article-content');
+                const articleText = articleParagraph ? articleParagraph.textContent : '';
+
+                if (articleText) {
+                    openModal();
+                    summaryContent.innerHTML = ''; // Clear previous summary
+                    loadingIndicator.classList.remove('hidden'); // Show loading indicator
+
+                    try {
+                        const prompt = `Resuma o seguinte texto de forma concisa e em português: ${articleText}`;
+                        let chatHistory = [];
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            summaryContent.innerHTML = text;
+                        } else {
+                            summaryContent.innerHTML = 'Não foi possível gerar o resumo. Tente novamente.';
+                        }
+                    } catch (error) {
+                        console.error('Erro ao chamar a API Gemini:', error);
+                        summaryContent.innerHTML = 'Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.';
+                    } finally {
+                        loadingIndicator.classList.add('hidden'); // Hide loading indicator
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
